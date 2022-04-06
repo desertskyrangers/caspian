@@ -1,12 +1,12 @@
 package org.desertskyrangers.caspian;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@RequiredArgsConstructor
+@Accessors( fluent = true )
 public class Air {
 
 	public static final Air ISA = new Air( 101325, 15, 1.225, 1.789e-5 );
