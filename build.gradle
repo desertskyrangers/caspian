@@ -1,6 +1,7 @@
 plugins {
 	id 'java-library'
 	id 'maven-publish'
+	id 'io.freefair.lombok' version '6.4.2'
 }
 
 java {
@@ -24,3 +25,5 @@ repositories {
 	mavenCentral()
 }
 
+ext.configDir = 'gradle/config'
+apply from: "$rootDir/$configDir/test.gradle"
