@@ -1,0 +1,26 @@
+plugins {
+	id 'java-library'
+	id 'maven-publish'
+}
+
+java {
+	modularity.inferModulePath = true
+}
+
+group = 'org.desertskyrangers'
+version = '0.1-SNAPSHOT'
+description = 'Caspian CFD Solver'
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+sourceSets {
+	main.java.srcDirs = ['source/main/java']
+	main.resources.srcDirs = ['source/main/resources']
+	test.java.srcDirs = ['source/test/java']
+	test.resources.srcDirs = ['source/test/resources']
+}
+
+repositories {
+	mavenCentral()
+}
+
