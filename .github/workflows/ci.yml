@@ -51,7 +51,7 @@ jobs:
 
       - name: Build Code
         run: |
-           ./gradlew clean check bootJar
+           ./gradlew clean check
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
