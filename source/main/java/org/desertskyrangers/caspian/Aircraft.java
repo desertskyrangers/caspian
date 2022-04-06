@@ -41,10 +41,20 @@ public class Aircraft {
 		this.wingLoading = calcWingLoading();
 	}
 
+	/**
+	 * Calculate the wing aspect ratio.
+	 *
+	 * @return The wing aspect ratio
+	 */
 	public double calcAspectRatio() {
 		return wingspan * wingspan / wingarea;
 	}
 
+	/**
+	 * Calculate the wing loading.
+	 *
+	 * @return The wing loading in g/cm^2
+	 */
 	public double calcWingLoading() {
 		return weight / wingarea;
 	}

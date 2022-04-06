@@ -9,6 +9,9 @@ import lombok.experimental.Accessors;
 @Accessors( fluent = true )
 public class Air {
 
+	/**
+	 * The Internation Standard Atmosphere.
+	 */
 	public static final Air ISA = new Air( 101325, 15, 1.225, 1.789e-5 );
 
 	/**
