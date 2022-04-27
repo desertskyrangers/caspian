@@ -9,6 +9,7 @@ import lombok.experimental.Accessors;
 @Accessors( fluent = true )
 public class Airfoil {
 
+	// FIXME Airfoil should not have a lift coefficient attribute. Lift coefficient is defined by calculation.
 	private final double liftCoefficient;
 
 }
