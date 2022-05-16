@@ -39,11 +39,11 @@ public class Source implements PotentialFlow {
 	}
 
 	private double streamPolar( double[] coordinates ) {
-		return strength * coordinates[ 1 ] / Cfd.TWO_PI;
+		return -strength * coordinates[ 1 ] / Cfd.TWO_PI;
 	}
 
 	private double potentialPolar( double[] coordinates ) {
-		return strength * Math.log( coordinates[ 0 ] ) / Cfd.TWO_PI;
+		return -strength * Math.log( coordinates[ 0 ] ) / Cfd.TWO_PI;
 	}
 
 }
