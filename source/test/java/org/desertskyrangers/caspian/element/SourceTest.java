@@ -13,7 +13,7 @@ public class SourceTest {
 		assertThat( new Source( 0, 0, 1 ).velocity( 1, 0 ) ).isEqualTo( new double[]{ 1 / (Cfd.TWO_PI * 1), 0 } );
 		assertThat( new Source( 0, 0, 5 ).velocity( 7, 0 ) ).isEqualTo( new double[]{ 5 / (Cfd.TWO_PI * 7), 0 } );
 
-		assertThat( new Source( 0, 0, 5 ).velocity( 0, 7 )[ 0 ] ).isCloseTo( 0.0, Offset.offset( 1e-17 ) );
+		assertThat( new Source( 0, 0, 5 ).velocity( 0, 7 )[ 0 ] ).isCloseTo( 0.0, Offset.offset( 1e-16 ) );
 		assertThat( new Source( 0, 0, 5 ).velocity( 0, 7 )[ 1 ] ).isEqualTo( 5 / (Cfd.TWO_PI * 7) );
 	}
 
