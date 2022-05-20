@@ -4,18 +4,24 @@ import org.desertskyrangers.caspian.Cfd;
 import org.desertskyrangers.caspian.PotentialFlow;
 import org.desertskyrangers.caspian.Vector;
 
-public class Vortex implements PotentialFlow {
+public class Doublet implements PotentialFlow {
 
 	private final double[] position;
 
 	private final double strength;
 
-	public Vortex( double x, double y, double strength ) {
-		this( new double[]{ x, y }, strength );
+	/**
+	 * The clockwise angle from the negative X axis. Similar to the angle of attack.
+	 */
+	private final double angle;
+
+	public Doublet( double x, double y, double angle, double strength ) {
+		this( new double[]{ x, y }, angle, strength );
 	}
 
-	public Vortex( double[] position, double strength ) {
+	public Doublet( double[] position, double angle, double strength ) {
 		this.position = position;
+		this.angle = angle;
 		this.strength = strength;
 	}
 
@@ -35,16 +41,25 @@ public class Vortex implements PotentialFlow {
 	}
 
 	private double[] velocityPolar( double[] coordinates ) {
-		double t = coordinates[ 1 ] + Math.PI * Math.signum( coordinates[ 1 ] );
-		return new double[]{ strength / (Cfd.TWO_PI * coordinates[ 0 ]), t };
+		double denom = Cfd.TWO_PI * coordinates[ 0 ] * coordinates[ 0 ];
+
+		// FIXME Need to take into account the doublet angle
+
+		double vr = strength * Math.cos( coordinates[ 1 ] ) / denom;
+		double vt = strength * Math.sin( coordinates[ 1 ] ) / denom;
+		return new double[]{ vr, vt };
 	}
 
 	private double streamPolar( double[] coordinates ) {
-		return strength * Math.log( coordinates[ 0 ] ) / Cfd.TWO_PI;
+		// FIXME Need to take into account the doublet angle
+
+		return -strength * Math.sin( coordinates[ 1 ] ) / Cfd.TWO_PI * coordinates[ 0 ];
 	}
 
 	private double potentialPolar( double[] coordinates ) {
-		return -strength * coordinates[ 1 ] / Cfd.TWO_PI;
+		// FIXME Need to take into account the doublet angle
+
+		return strength * Math.cos( coordinates[ 1 ] ) / Cfd.TWO_PI * coordinates[ 0 ];
 	}
 
 }

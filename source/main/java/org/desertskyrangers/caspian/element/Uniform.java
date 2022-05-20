@@ -7,7 +7,7 @@ public class Uniform implements PotentialFlow {
 	private final double[] velocity;
 
 	public Uniform( double v, double theta ) {
-		this.velocity = new double[] {v * Math.cos(theta), v * Math.sin(theta)};
+		this.velocity = new double[]{ v * Math.cos( theta ), v * Math.sin( theta ) };
 	}
 
 	public Uniform( double[] velocity ) {
@@ -19,11 +19,11 @@ public class Uniform implements PotentialFlow {
 	}
 
 	public double stream( double x, double y ) {
-		return velocity[0] * y - velocity[1] * x;
+		return velocity[ 0 ] * y - velocity[ 1 ] * x;
 	}
 
 	public double potential( double x, double y ) {
-		return velocity[0] * x + velocity[1] * y;
+		return velocity[ 0 ] * x + velocity[ 1 ] * y;
 	}
 
 }
