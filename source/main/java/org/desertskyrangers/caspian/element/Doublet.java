@@ -42,24 +42,17 @@ public class Doublet implements PotentialFlow {
 
 	private double[] velocityPolar( double[] coordinates ) {
 		double denom = Cfd.TWO_PI * coordinates[ 0 ] * coordinates[ 0 ];
-
-		// FIXME Need to take into account the doublet angle
-
-		double vr = strength * Math.cos( coordinates[ 1 ] ) / denom;
-		double vt = strength * Math.sin( coordinates[ 1 ] ) / denom;
+		double vr = strength * Math.cos( coordinates[ 1 ]-angle ) / denom;
+		double vt = strength * Math.sin( coordinates[ 1 ]-angle ) / denom;
 		return new double[]{ vr, vt };
 	}
 
 	private double streamPolar( double[] coordinates ) {
-		// FIXME Need to take into account the doublet angle
-
-		return -strength * Math.sin( coordinates[ 1 ] ) / Cfd.TWO_PI * coordinates[ 0 ];
+		return -strength * Math.sin( coordinates[ 1 ]-angle ) / Cfd.TWO_PI * coordinates[ 0 ];
 	}
 
 	private double potentialPolar( double[] coordinates ) {
-		// FIXME Need to take into account the doublet angle
-
-		return strength * Math.cos( coordinates[ 1 ] ) / Cfd.TWO_PI * coordinates[ 0 ];
+		return strength * Math.cos( coordinates[ 1 ]-angle ) / Cfd.TWO_PI * coordinates[ 0 ];
 	}
 
 }
