@@ -40,8 +40,8 @@ public class Doublet extends Singularity {
 
 		double r42pi = r4 * Cfd.TWO_PI;
 
-		double vx = -strength * x2 / r42pi - -strength * y2 / r42pi;
-		double vy = -strength * dx * dy / r42pi + -strength * dx * dy / r42pi;
+		double vx = -strength * x2 / r42pi + strength * y2 / r42pi;
+		double vy = -strength * dx * dy / r42pi - strength * dx * dy / r42pi;
 
 		return new double[]{ vx, vy };
 	}
