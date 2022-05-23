@@ -1,5 +1,6 @@
 package org.desertskyrangers.caspian.element;
 
+import org.assertj.core.data.Offset;
 import org.desertskyrangers.caspian.Cfd;
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +15,11 @@ public class DoubletTest {
 
 		assertThat( new Doublet( 0, 0, 0, 1 ).velocity( 0, 1 ) ).isEqualTo( new double[]{ 1 / (Cfd.TWO_PI * 1 * 1), -0.0 } );
 
-		//assertThat( new Doublet( 0, 0, 0, 1 ).velocity( 0, 1 )[ 0 ] ).isCloseTo( 0.0, Offset.offset( 1e-16 ) );
-		//assertThat( new Doublet( 0, 0, 0, 5 ).velocity( 0, 7 )[ 1 ] ).isEqualTo( 5 / (Cfd.TWO_PI * 7) );
+		assertThat( new Doublet( 0, 0, 0, 1 ).velocity( -1, 1 )[ 0 ] ).isCloseTo( 0.0, Offset.offset( 1e-16 ) );
+		assertThat( new Doublet( 0, 0, 0, 1 ).velocity( -1, 1 )[ 1 ] ).isCloseTo( 1 / (Cfd.TWO_PI * Cfd.SQRT_2 * Cfd.SQRT_2), Offset.offset( 1e-16 ) );
+
+		assertThat( new Doublet( 0, 0, 0, 1 ).velocity( 1, 1 )[ 0 ] ).isCloseTo( 0.0, Offset.offset( 1e-16 ) );
+		assertThat( new Doublet( 0, 0, 0, 1 ).velocity( 1, 1 )[ 1 ] ).isCloseTo( -1 / (Cfd.TWO_PI * Cfd.SQRT_2 * Cfd.SQRT_2), Offset.offset( 1e-16 ) );
 	}
 
 	@Test
