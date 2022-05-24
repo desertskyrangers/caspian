@@ -1,0 +1,24 @@
+package org.desertskyrangers.caspian.assertion;
+
+import org.assertj.core.api.AbstractAssert;
+import org.assertj.core.api.Assertions;
+import org.assertj.core.data.Offset;
+
+public class DoubleArrayAssert extends AbstractAssert<DoubleArrayAssert, double[]> {
+
+	protected DoubleArrayAssert( double[] actual ) {
+		super( actual, DoubleArrayAssert.class );
+	}
+
+	public static DoubleArrayAssert assertThat( double[] actual ) {
+		return new DoubleArrayAssert( actual );
+	}
+
+	public DoubleArrayAssert isCloseTo( double[] expected, Offset<Double> offset ) {
+		for( int index = 0; index < actual.length; index++ ) {
+			Assertions.assertThat( expected[ index ] ).isCloseTo( actual[ index ], offset );
+		}
+		return this;
+	}
+
+}
