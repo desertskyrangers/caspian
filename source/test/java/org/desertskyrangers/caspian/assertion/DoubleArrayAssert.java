@@ -6,12 +6,22 @@ import org.assertj.core.data.Offset;
 
 public class DoubleArrayAssert extends AbstractAssert<DoubleArrayAssert, double[]> {
 
+	public static final double DEFAULT_CLOSENESS = 1e-16;
+
 	protected DoubleArrayAssert( double[] actual ) {
 		super( actual, DoubleArrayAssert.class );
 	}
 
 	public static DoubleArrayAssert assertThat( double[] actual ) {
 		return new DoubleArrayAssert( actual );
+	}
+
+	public DoubleArrayAssert isEqualTo( double[] expected ) {
+		return isCloseTo( expected, Offset.offset( 0.0 ) );
+	}
+
+	public DoubleArrayAssert isCloseTo( double[] expected ) {
+		return isCloseTo( expected, Offset.offset(DEFAULT_CLOSENESS));
 	}
 
 	public DoubleArrayAssert isCloseTo( double[] expected, Offset<Double> offset ) {

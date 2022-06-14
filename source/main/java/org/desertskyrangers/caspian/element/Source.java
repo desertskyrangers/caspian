@@ -9,8 +9,6 @@ public class Source implements PotentialFlow {
 
 	private final double strength;
 
-	private final double boundaryFlowCoefficient;
-
 	public Source( double x, double y, double strength ) {
 		this( new double[]{ x, y }, strength );
 	}
@@ -18,9 +16,6 @@ public class Source implements PotentialFlow {
 	public Source( double[] position, double strength ) {
 		this.position = position;
 		this.strength = strength;
-
-		// This is an optimization to avoid the divide on every calculation
-		this.boundaryFlowCoefficient = this.strength / Cfd.TWO_PI;
 	}
 
 	@Override
@@ -36,7 +31,7 @@ public class Source implements PotentialFlow {
 		if( r == 0.0 ) return new double[]{ Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY };
 
 		// Calculate the velocity coefficient at the point x,y
-		double c = boundaryFlowCoefficient * r;
+		double c = this.strength / (Cfd.TWO_PI * r);
 
 		// Return the velocity vector at the point x,y
 		return new double[]{ c * xr, c * yr };
