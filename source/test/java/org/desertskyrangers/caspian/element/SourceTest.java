@@ -1,6 +1,5 @@
 package org.desertskyrangers.caspian.element;
 
-import org.assertj.core.data.Offset;
 import org.desertskyrangers.caspian.Cfd;
 import org.junit.jupiter.api.Test;
 

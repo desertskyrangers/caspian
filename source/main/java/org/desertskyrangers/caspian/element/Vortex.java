@@ -37,7 +37,6 @@ public class Vortex implements PotentialFlow {
 		if( r == 0.0 ) return new double[]{ Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY };
 
 		// Calculate the velocity coefficient at the point x,y
-		System.out.println( "r=" + r);
 		double c = this.strength / (Cfd.TWO_PI * r);
 
 		// Return the velocity vector at the point x,y
