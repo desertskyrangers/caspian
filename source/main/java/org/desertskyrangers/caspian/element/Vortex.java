@@ -24,15 +24,15 @@ public class Vortex implements PotentialFlow {
 		return Vector.polarToCartesian( velocityPolar( Vector.cartesianToPolar( x - position[ 0 ], y - position[ 1 ] ) ) );
 	}
 
-	@Override
-	public double stream( double x, double y ) {
-		return streamPolar( Vector.cartesianToPolar( x - position[ 0 ], y - position[ 1 ] ) );
-	}
-
-	@Override
-	public double potential( double x, double y ) {
-		return potentialPolar( Vector.cartesianToPolar( x - position[ 0 ], y - position[ 1 ] ) );
-	}
+//	@Override
+//	public double stream( double x, double y ) {
+//		return streamPolar( Vector.cartesianToPolar( x - position[ 0 ], y - position[ 1 ] ) );
+//	}
+//
+//	@Override
+//	public double potential( double x, double y ) {
+//		return potentialPolar( Vector.cartesianToPolar( x - position[ 0 ], y - position[ 1 ] ) );
+//	}
 
 	private double[] velocityPolar( double[] coordinates ) {
 		double t = coordinates[ 1 ] + Math.PI * Math.signum( coordinates[ 1 ] );

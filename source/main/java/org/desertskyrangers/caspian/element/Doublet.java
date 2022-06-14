@@ -38,15 +38,15 @@ public class Doublet extends Singularity {
 		return new double[]{ cosOrientation * dv[ 0 ] + sinOrientation * dv[ 1 ], -sinOrientation * dv[ 0 ] + cosOrientation * dv[ 1 ] };
 	}
 
-	@Override
-	public double stream( double x, double y ) {
-		return streamPolar( Vector.cartesianToPolar( x - positionX, y - positionY ) );
-	}
-
-	@Override
-	public double potential( double x, double y ) {
-		return potentialPolar( Vector.cartesianToPolar( x - positionX, y - positionY ) );
-	}
+//	@Override
+//	public double stream( double x, double y ) {
+//		return streamPolar( Vector.cartesianToPolar( x - positionX, y - positionY ) );
+//	}
+//
+//	@Override
+//	public double potential( double x, double y ) {
+//		return potentialPolar( Vector.cartesianToPolar( x - positionX, y - positionY ) );
+//	}
 
 	private double[] velocityRelativeToDoublet( double dx, double dy ) {
 		double x2 = dx * dx;

@@ -18,12 +18,12 @@ public class Uniform implements PotentialFlow {
 		return new double[]{ velocity[ 0 ], velocity[ 1 ] };
 	}
 
-	public double stream( double x, double y ) {
-		return velocity[ 0 ] * y - velocity[ 1 ] * x;
-	}
-
-	public double potential( double x, double y ) {
-		return velocity[ 0 ] * x + velocity[ 1 ] * y;
-	}
+//	public double stream( double x, double y ) {
+//		return velocity[ 0 ] * y - velocity[ 1 ] * x;
+//	}
+//
+//	public double potential( double x, double y ) {
+//		return velocity[ 0 ] * x + velocity[ 1 ] * y;
+//	}
 
 }
