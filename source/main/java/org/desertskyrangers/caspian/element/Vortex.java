@@ -10,8 +10,6 @@ public class Vortex implements PotentialFlow {
 
 	private final double strength;
 
-	private final double boundaryFlowCoefficient;
-
 	public Vortex( double x, double y, double strength ) {
 		this( new double[]{ x, y }, strength );
 	}
@@ -19,9 +17,6 @@ public class Vortex implements PotentialFlow {
 	public Vortex( double[] position, double strength ) {
 		this.position = position;
 		this.strength = strength;
-
-		// This is an optimization to avoid the divide on every calculation
-		this.boundaryFlowCoefficient = this.strength / Cfd.TWO_PI;
 	}
 
 	@Override
