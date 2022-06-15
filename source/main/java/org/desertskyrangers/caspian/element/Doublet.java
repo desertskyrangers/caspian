@@ -27,25 +27,24 @@ public class Doublet extends Singularity {
 		double xr = x - positionX;
 		double yr = y - positionY;
 
-		// Get the distance from the source position to the point x,y
-		double r2 = xr * xr + yr * yr;
+		double x2 = xr * xr;
+		double y2 = yr * yr;
+		double r2 = x2 + y2;
 
 		// If the distance is zero return positive infinity
 		if( r2 == 0.0 ) return new double[]{ Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY };
 
-		// Rotate the point to doublet rotation
-		xr = cosAngle * xr - sinAngle * yr;
-		yr = sinAngle * xr + cosAngle * yr;
+		// A bunch of useful values
+		double xy = xr * yr;
+		double _2xy = 2.0 * xy;
+		double rxy = x2 - y2;
+		double r4 = r2 * r2;
+		double c = -strength / r4;
 
-		//		double[] v = velocityRelativeToDoublet( xr, yr );
-		//
-		//		// Rotate the vector back to world orientation
-		//		return new double[]{ cosOrientation * v[ 0 ] + sinOrientation * v[ 1 ], -sinOrientation * v[ 0 ] + cosOrientation * v[ 1 ] };
+		double u = c * (rxy * cosAngle + _2xy * sinAngle);
+		double v = c * (-rxy * sinAngle + _2xy * cosAngle);
 
-		double u = strength / r2 / r2 * ((xr * xr - yr * yr) * cosAngle + 2.0 * xr * yr * sinAngle);
-		double v = strength / r2 / r2 * (-(xr * xr - yr * yr) * sinAngle + 2.0 * xr * yr * cosAngle);
-
-		return new double[]{ cosAngle *u + sinAngle *v, -sinAngle * u + cosAngle *v };
+		return new double[]{ cosAngle * u + sinAngle * v, -sinAngle * u + cosAngle * v };
 	}
 
 	//	@Override
