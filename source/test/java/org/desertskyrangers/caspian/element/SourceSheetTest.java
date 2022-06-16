@@ -35,7 +35,7 @@ public class SourceSheetTest {
 			// FIXME This should not be bigger than 1
 			Arguments.of( -1, 0, 1, 0, 1, -2, 0, -1.0986122886681098, 0.0 ),
 			Arguments.of( -1, 0, 1, 0, 1, -1, 0, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY ),
-			Arguments.of( -1, 0, 1, 0, 1, 0, 0, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY ),
+			Arguments.of( -1, 0, 1, 0, 1, 0, 0, 0.0, 0.0 ),
 			Arguments.of( -1, 0, 1, 0, 1, 1, 0, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY),
 			// FIXME This should not be bigger than 1
 			Arguments.of( -1, 0, 1, 0, 1, 2, 0, 1.0986122886681098, 0.0 )
