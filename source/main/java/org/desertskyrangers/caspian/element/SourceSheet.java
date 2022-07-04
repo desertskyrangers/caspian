@@ -19,8 +19,8 @@ public class SourceSheet extends Sheet {
 		double dy = positionY1 - positionY;
 		double length = Math.sqrt( dx * dx + dy * dy );
 
-		sin = dx / length;
-		cos = dy / length;
+		sin = dy / length;
+		cos = dx / length;
 	}
 
 	@Override
@@ -41,15 +41,14 @@ public class SourceSheet extends Sheet {
 
 		if( r2 == 0.0 || r12 == 0.0 ) return new double[]{ Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY };
 
-		// Get the angle from the point x,y to each endpoint
-		double al = Math.atan2( xr, yr ) - Math.atan2( xr1, yr1);
+		// Get the sweep angle from endpoint 1 to endpoint 2 using the point x,y as the center
+		double al = Math.atan2( yr1, xr1 ) - Math.atan2( yr, xr );
 		if( al > Math.PI ) al -= Cfd.TWO_PI;
 		if( al < -Math.PI ) al += Cfd.TWO_PI;
 
-		double t = strength * Math.log( r2 / r12 ) / 2.0;
-
-		double u = t * cos - strength * al * sin;
-		double v = t * sin + strength * al * cos;
+		double t = strength * Math.log( r2 / r12 );
+		double u = ((t / 2.0 * cos) - (strength * al * sin))/Cfd.TWO_PI;
+		double v = ((t / 2.0 * sin) + (strength * al * cos))/Cfd.TWO_PI;
 
 		System.out.printf( "al=%f sin=%f cos=%f t=%f %n", Math.toDegrees( al ), sin, cos, t );
 
