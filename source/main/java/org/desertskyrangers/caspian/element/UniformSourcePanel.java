@@ -42,23 +42,13 @@ public class UniformSourcePanel extends Panel {
 		if( r2 == 0.0 || r12 == 0.0 ) return new double[]{ Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY };
 
 		// Get the sweep angle from endpoint 1 to endpoint 2 using the point x,y as the center
-		double al = Math.atan2( yr1, xr1 ) - Math.atan2( yr, xr );
+		double al = Math.atan2( yr, xr ) - Math.atan2( yr1, xr1 );
 		if( al > Math.PI ) al -= Cfd.TWO_PI;
 		if( al < -Math.PI ) al += Cfd.TWO_PI;
 
 		double t = 0.5 * strength * Math.log( r2 / r12 );
-		double u = Cfd.ONE_OVER_TWO_PI * (t * cos - strength * al * sin);
-		double v = Cfd.ONE_OVER_TWO_PI * (t * sin + strength * al * cos);
-
-		// Bennett's solution
-		//		double ua = 0.5 * Math.log( r2 );
-		//		double ub = 0.5 * -Math.log( r12 );
-		//		double u = Cfd.ONE_OVER_TWO_PI * strength * (ua + ub);
-		//		double va = Math.atan2( y, xr );
-		//		double vb = Math.atan2( y, xr1 );
-		//		double v = Cfd.ONE_OVER_TWO_PI * strength * (vb - va);
-
-		//System.out.printf( "al=%f sin=%f cos=%f t=%f %n", Math.toDegrees( al ), sin, cos, t );
+		double u = Cfd.ONE_OVER_TWO_PI * (t * cos + strength * al * sin);
+		double v = Cfd.ONE_OVER_TWO_PI * (t * sin - strength * al * cos);
 
 		return new double[]{ u, v };
 	}
