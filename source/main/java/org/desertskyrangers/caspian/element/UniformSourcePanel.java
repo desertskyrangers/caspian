@@ -2,17 +2,17 @@ package org.desertskyrangers.caspian.element;
 
 import org.desertskyrangers.caspian.Cfd;
 
-public class SourceSheet extends Sheet {
+public class UniformSourcePanel extends Panel {
 
 	private final double sin;
 
 	private final double cos;
 
-	public SourceSheet( double[] position, double[] position1, double strength ) {
+	public UniformSourcePanel( double[] position, double[] position1, double strength ) {
 		this( position[ 0 ], position[ 1 ], position1[ 0 ], position1[ 1 ], strength );
 	}
 
-	public SourceSheet( double positionX, double positionY, double positionX1, double positionY1, double strength ) {
+	public UniformSourcePanel( double positionX, double positionY, double positionX1, double positionY1, double strength ) {
 		super( positionX, positionY, positionX1, positionY1, strength );
 
 		double dx = positionX1 - positionX;
@@ -46,11 +46,19 @@ public class SourceSheet extends Sheet {
 		if( al > Math.PI ) al -= Cfd.TWO_PI;
 		if( al < -Math.PI ) al += Cfd.TWO_PI;
 
-		double t = strength * Math.log( r2 / r12 );
-		double u = ((t / 2.0 * cos) - (strength * al * sin))/Cfd.TWO_PI;
-		double v = ((t / 2.0 * sin) + (strength * al * cos))/Cfd.TWO_PI;
+		double t = 0.5 * strength * Math.log( r2 / r12 );
+		double u = Cfd.ONE_OVER_TWO_PI * (t * cos - strength * al * sin);
+		double v = Cfd.ONE_OVER_TWO_PI * (t * sin + strength * al * cos);
 
-		System.out.printf( "al=%f sin=%f cos=%f t=%f %n", Math.toDegrees( al ), sin, cos, t );
+		// Bennett's solution
+		//		double ua = 0.5 * Math.log( r2 );
+		//		double ub = 0.5 * -Math.log( r12 );
+		//		double u = Cfd.ONE_OVER_TWO_PI * strength * (ua + ub);
+		//		double va = Math.atan2( y, xr );
+		//		double vb = Math.atan2( y, xr1 );
+		//		double v = Cfd.ONE_OVER_TWO_PI * strength * (vb - va);
+
+		//System.out.printf( "al=%f sin=%f cos=%f t=%f %n", Math.toDegrees( al ), sin, cos, t );
 
 		return new double[]{ u, v };
 	}
