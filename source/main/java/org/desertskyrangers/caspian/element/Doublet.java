@@ -6,9 +6,9 @@ public class Doublet extends Singularity {
 
 	private final double angle;
 
-	private final double sinAngle;
+	private final double sin;
 
-	private final double cosAngle;
+	private final double cos;
 
 	public Doublet( double[] position, double angle, double strength ) {
 		this( position[ 0 ], position[ 1 ], angle, strength );
@@ -17,34 +17,45 @@ public class Doublet extends Singularity {
 	public Doublet( double x, double y, double angle, double strength ) {
 		super( x, y, strength );
 		this.angle = angle;
-		this.sinAngle = Math.sin( angle );
-		this.cosAngle = Math.cos( angle );
+		this.sin = Math.sin( angle );
+		this.cos = Math.cos( angle );
 	}
 
 	@Override
 	public double[] velocity( double x, double y ) {
 		// Get the vector from the source position to the point x,y
-		double xr = x - positionX;
-		double yr = y - positionY;
+		double dx = x - positionX;
+		double dy = y - positionY;
 
-		double x2 = xr * xr;
-		double y2 = yr * yr;
+		// Rotate the point to local coordinates
+		double xl = cos * dx + sin * dy;
+		double yl = sin * dx - cos * dy;
+
+		double x2 = xl * xl;
+		double y2 = yl * yl;
 		double r2 = x2 + y2;
 
 		// If the distance is zero return positive infinity
 		if( r2 == 0.0 ) return new double[]{ Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY };
 
 		// A bunch of useful values
-		double xy = xr * yr;
-		double _2xy = 2.0 * xy;
+		double xy = xl * yl;
+		double twoxy = 2.0 * xy;
 		double rxy = x2 - y2;
 		double r4 = r2 * r2;
-		double c = -strength / r4;
 
-		double u = c * (rxy * cosAngle + _2xy * sinAngle);
-		double v = c * (-rxy * sinAngle + _2xy * cosAngle);
+		//		double c = strength / (r4 * Cfd.TWO_PI);
+		//		double u = c * (rxy * cos + twoxy * sin);
+		//		double v = c * (-rxy * sin + twoxy * cos);
+		//		return new double[]{ u,v };
 
-		return new double[]{ cosAngle * u + sinAngle * v, -sinAngle * u + cosAngle * v };
+		double q = strength / Cfd.TWO_PI;
+		double d = 1 / r4;
+		double u = q * rxy * d;
+		double v = q * twoxy * d;
+
+		// Rotate the vector back to world coordinates
+		return new double[]{ -cos * u - sin * v, -sin * u + cos * v };
 	}
 
 	//	@Override
