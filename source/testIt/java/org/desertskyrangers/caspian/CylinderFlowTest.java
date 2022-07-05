@@ -21,14 +21,11 @@ public class CylinderFlowTest {
 		double mu = Vector.magnitude( onset.getVelocity() ) * Cfd.TWO_PI * r * r;
 		field.add( new Doublet( 0.5, 0, Vector.angle( onset.getVelocity() ), mu ) );
 
-		System.out.printf( "mu=%f%n", mu );
-
-		// FIXME Unit test failures here tell me the doublet code is not correct
-		//assertThat( field.velocityAt( -1, 0 ) ).isEqualTo( new double[]{ 5.0 / 9.0, 0 } );
+		assertThat( field.velocityAt( -1, 0 ) ).isEqualTo( new double[]{ 8.0 / 9.0, 0 } );
 		assertThat( field.velocityAt( 0, 0 ) ).isCloseTo( new double[]{ 0, 0 } );
-		//assertThat( field.velocityAt( 0.5, 0 ) ).isEqualTo( new double[]{ -3, 0 } );
+		assertThat( field.velocityAt( 0.5, 0 ) ).isEqualTo( new double[]{ Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY } );
 		assertThat( field.velocityAt( 1, 0 ) ).isCloseTo( new double[]{ 0, 0 } );
-		//assertThat( field.velocityAt( 2, 0 ) ).isEqualTo( new double[]{ 5.0 / 9.0, 0 } );
+		assertThat( field.velocityAt( 2, 0 ) ).isEqualTo( new double[]{ 8.0 / 9.0, 0 } );
 	}
 
 }
