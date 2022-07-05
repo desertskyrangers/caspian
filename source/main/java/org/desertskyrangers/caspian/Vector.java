@@ -2,12 +2,24 @@ package org.desertskyrangers.caspian;
 
 public class Vector {
 
+	public static double[] sum( double[] a, double[] b ) {
+		return new double[]{ a[ 0 ] + b[ 0 ], a[ 1 ] + b[ 1 ] };
+	}
+
 	public static double magnitude( double x, double y ) {
 		return Math.sqrt( x * x + y * y );
 	}
 
+	public static double magnitude( double[] vector ) {
+		return magnitude( vector[ 0 ], vector[ 1 ] );
+	}
+
 	public static double angle( double x, double y ) {
 		return Math.atan2( y, x );
+	}
+
+	public static double angle( double[] vector ) {
+		return angle( vector[ 0 ], vector[ 1 ] );
 	}
 
 	public static double[] cartesianToPolar( double[] coordinates ) {

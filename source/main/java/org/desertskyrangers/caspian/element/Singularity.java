@@ -1,8 +1,8 @@
 package org.desertskyrangers.caspian.element;
 
-import org.desertskyrangers.caspian.PotentialFlow;
+import org.desertskyrangers.caspian.FlowElement;
 
-public abstract class Singularity implements PotentialFlow {
+public abstract class Singularity implements FlowElement {
 
 	protected double positionX;
 

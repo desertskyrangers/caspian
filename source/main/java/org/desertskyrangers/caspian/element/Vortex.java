@@ -1,8 +1,6 @@
 package org.desertskyrangers.caspian.element;
 
 import org.desertskyrangers.caspian.Cfd;
-import org.desertskyrangers.caspian.PotentialFlow;
-import org.desertskyrangers.caspian.Vector;
 
 public class Vortex extends Singularity {
 

@@ -1,6 +1,6 @@
 package org.desertskyrangers.caspian;
 
-public interface PotentialFlow {
+public interface FlowElement {
 
 	double[] velocity( double x, double y );
 

@@ -1,7 +1,6 @@
 package org.desertskyrangers.caspian.element;
 
 import org.desertskyrangers.caspian.Cfd;
-import org.desertskyrangers.caspian.PotentialFlow;
 
 public class Source extends Singularity {
 

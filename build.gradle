@@ -17,8 +17,8 @@ targetCompatibility = JavaVersion.VERSION_17
 sourceSets {
 	main.java.srcDirs = ['source/main/java']
 	main.resources.srcDirs = ['source/main/resources']
-	test.java.srcDirs = ['source/test/java']
-	test.resources.srcDirs = ['source/test/resources']
+	test.java.srcDirs = ['source/test/java', 'source/testIt/java']
+	test.resources.srcDirs = ['source/test/resources', 'source/testIt/resources']
 }
 
 repositories {
