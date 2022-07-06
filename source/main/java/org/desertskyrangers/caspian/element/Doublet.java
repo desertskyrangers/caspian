@@ -40,19 +40,14 @@ public class Doublet extends Singularity {
 
 		// A bunch of useful values
 		double xy = xl * yl;
-		double twoxy = 2.0 * xy;
 		double rxy = x2 - y2;
+		double twoxy = 2.0 * xy;
 		double r4 = r2 * r2;
-
-		//		double c = strength / (r4 * Cfd.TWO_PI);
-		//		double u = c * (rxy * cos + twoxy * sin);
-		//		double v = c * (-rxy * sin + twoxy * cos);
-		//		return new double[]{ u,v };
-
-		double q = strength / Cfd.TWO_PI;
 		double d = 1 / r4;
-		double u = q * rxy * d;
-		double v = q * twoxy * d;
+		double s = strength / Cfd.TWO_PI;
+
+		double u = s * rxy * d;
+		double v = s * twoxy * d;
 
 		// Rotate the vector back to world coordinates
 		return new double[]{ -cos * u - sin * v, -sin * u + cos * v };
