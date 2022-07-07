@@ -12,6 +12,10 @@ public class FlowField {
 
 	private final Uniform onsetFlow;
 
+	private final double vInf;
+
+	private final double pInf;
+
 	private Set<FlowElement> elements;
 
 	public FlowField( Uniform onsetFlow ) {
@@ -21,6 +25,8 @@ public class FlowField {
 	public FlowField( Air air, Uniform onsetFlow ) {
 		this.air = air;
 		this.onsetFlow = onsetFlow;
+		this.vInf = Vector.magnitude( onsetFlow.getVelocity() );
+		this.pInf = air.pressure() - (0.5 * air.density() * vInf * vInf);
 		this.elements = new HashSet<>();
 	}
 
@@ -62,23 +68,12 @@ public class FlowField {
 	}
 
 	public double pressureAt( double x, double y ) {
-		double airPressure = air.pressure();
-		double airDensity = air.density();
-		double vLocal = Vector.magnitude( velocityAt( x, y ) );
-		return airPressure - (0.5 * airDensity * vLocal * vLocal);
+		double v = Vector.magnitude( velocityAt( x, y ) );
+		return air.pressure() - (0.5 * air.density() * v * v);
 	}
 
 	public double relativePressureAt( double x, double y ) {
-		double airPressure = air.pressure();
-		double airDensity = air.density();
-
-		double vInf = Vector.magnitude( onsetFlow.getVelocity() );
-		double pInf = airPressure - (0.5 * airDensity * vInf * vInf);
-
-		double vLocal = Vector.magnitude( velocityAt( x, y ) );
-		double pLocal = pressureAt(x,y);
-
-		return pLocal - pInf;
+		return pressureAt(x,y) - pInf;
 	}
 
 }
