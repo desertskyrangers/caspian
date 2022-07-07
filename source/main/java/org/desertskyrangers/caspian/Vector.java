@@ -2,6 +2,12 @@ package org.desertskyrangers.caspian;
 
 public class Vector {
 
+	public static double[] add( double[] a, double[] b ) {
+		a[0] += b[0];
+		a[1] += b[1];
+		return a;
+	}
+
 	public static double[] sum( double[] a, double[] b ) {
 		return new double[]{ a[ 0 ] + b[ 0 ], a[ 1 ] + b[ 1 ] };
 	}
