@@ -16,7 +16,7 @@ public class FlowField {
 
 	private final double pInf;
 
-	private Set<FlowElement> elements;
+	private final Set<FlowElement> elements;
 
 	public FlowField( Uniform onsetFlow ) {
 		this( Air.ISA, onsetFlow );
