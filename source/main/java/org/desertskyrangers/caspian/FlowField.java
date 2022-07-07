@@ -47,12 +47,12 @@ public class FlowField {
 		Vector.add( v, onsetFlow.getVelocity() );
 
 		// Add all the local velocity
-		Vector.add( v, localVelocityAt( x, y ) );
+		Vector.add( v, relativeVelocityAt( x, y ) );
 
 		return v;
 	}
 
-	private double[] localVelocityAt( double x, double y ) {
+	public double[] relativeVelocityAt( double x, double y ) {
 		final double[] v = new double[]{ 0, 0 };
 
 		// Add all the element velocities
@@ -64,12 +64,19 @@ public class FlowField {
 	public double pressureAt( double x, double y ) {
 		double airPressure = air.pressure();
 		double airDensity = air.density();
+		double vLocal = Vector.magnitude( velocityAt( x, y ) );
+		return airPressure - (0.5 * airDensity * vLocal * vLocal);
+	}
+
+	public double relativePressureAt( double x, double y ) {
+		double airPressure = air.pressure();
+		double airDensity = air.density();
 
 		double vInf = Vector.magnitude( onsetFlow.getVelocity() );
 		double pInf = airPressure - (0.5 * airDensity * vInf * vInf);
 
 		double vLocal = Vector.magnitude( velocityAt( x, y ) );
-		double pLocal = airPressure - (0.5 * airDensity * vLocal * vLocal);
+		double pLocal = pressureAt(x,y);
 
 		return pLocal - pInf;
 	}
