@@ -84,4 +84,22 @@ public class Vector {
 		return Vector.of(a[0]*s, a[1]*s);
 	}
 
+	/**
+	 * Scale a vector by a constant. Unlike the {@link #multiply} method,
+	 * this method modifies parameter a and does not create a new array.
+	 *
+	 * @param a The vector to scale
+	 * @param s The scaling constant
+	 * @return The scaled vector
+	 */
+	public static double[] unscale( double[] a, final double s ) {
+		a[0] /= s;
+		a[1] /= s;
+		return a;
+	}
+
+	public static double[] divide( final double[] a, final double s ) {
+		return Vector.of(a[0]/s, a[1]/s);
+	}
+
 }

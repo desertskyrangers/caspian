@@ -6,16 +6,16 @@ import java.util.function.Predicate;
 
 public class PositionedVectorSet extends HashSet<PositionedVector> {
 
-	private double[] centerPosition;
+	private double[] centroidPosition;
 
-	private double[] centerVector;
+	private double[] centroidVector;
 
-	double[] centerPosition() {
-		return centerPosition;
+	double[] centroidPosition() {
+		return centroidPosition;
 	}
 
-	double[] centerVector() {
-		return centerVector;
+	double[] centroidVector() {
+		return centroidVector;
 	}
 
 	@Override
@@ -68,24 +68,20 @@ public class PositionedVectorSet extends HashSet<PositionedVector> {
 
 	private void update() {
 		double[] sum = Vector.of( 0, 0 );
-
-		double armX = 0;
-		double armY = 0;
-		double torqueX = 0;
-		double torqueY = 0;
+		double[] pos = Vector.of( 0, 0 );
+		double magnitudeSum = 0;
 		for( PositionedVector v : this ) {
+			double magnitude = Vector.magnitude( v.vector() );
+			Vector.add( pos, Vector.multiply( v.position(), magnitude ) );
 			Vector.add( sum, v.vector() );
-			armX += v.position()[ 0 ];
-			armY += v.position()[ 1 ];
-			torqueX += v.position()[ 0 ] * v.vector()[ 1 ];
-			torqueY += v.position()[ 1 ] * v.vector()[ 0 ];
+			magnitudeSum += magnitude;
 		}
 
-		double posX = torqueX == 0.0 ? 0.0 : torqueX / armX;
-		double posY = torqueY == 0.0 ? 0.0 : torqueY / armY;
+		double inverse = 1.0 / magnitudeSum;
+		Vector.scale( pos, inverse );
 
-		this.centerPosition = Vector.of( posX, posY );
-		this.centerVector = sum;
+		this.centroidPosition = Vector.of( pos[ 0 ], pos[ 1 ] );
+		this.centroidVector = sum;
 	}
 
 }
