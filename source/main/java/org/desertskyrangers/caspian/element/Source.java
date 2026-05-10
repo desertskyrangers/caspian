@@ -1,6 +1,7 @@
 package org.desertskyrangers.caspian.element;
 
 import org.desertskyrangers.caspian.Cfd;
+import org.desertskyrangers.caspian.Vector;
 
 public class Source extends Singularity {
 
@@ -31,15 +32,15 @@ public class Source extends Singularity {
 		return new double[]{ c * xr, c * yr };
 	}
 
-	//	@Override
-	//	public double stream( double x, double y ) {
-	//		return streamPolar( Vector.cartesianToPolar( x - position[ 0 ], y - position[ 1 ] ) );
-	//	}
-	//
-	//	@Override
-	//	public double potential( double x, double y ) {
-	//		return potentialPolar( Vector.cartesianToPolar( x - position[ 0 ], y - position[ 1 ] ) );
-	//	}
+	@Override
+	public double stream( double x, double y ) {
+		return streamPolar( Vector.cartesianToPolar( x - positionX, y - positionY ) );
+	}
+
+	@Override
+	public double potential( double x, double y ) {
+		return potentialPolar( Vector.cartesianToPolar( x - positionX, y - positionY ) );
+	}
 
 	private double[] velocityPolar( double[] coordinates ) {
 		return new double[]{ strength / (Cfd.TWO_PI * coordinates[ 0 ]), coordinates[ 1 ] };
