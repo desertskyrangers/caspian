@@ -2,10 +2,20 @@ package org.desertskyrangers.caspian;
 
 public interface FlowElement {
 
-	double[] velocity( double x, double y );
+	default double[] velocity( double x, double y ) {
+		return Vector.ZERO;
+	}
 
-	//double stream( double x, double y );
+	default double[] velocityAtInfinity() {
+		return Vector.ZERO;
+	}
 
-	//double potential( double x, double y );
+	default double stream( double x, double y ) {
+		return 0;
+	}
+
+	default double potential( double x, double y ) {
+		return 0;
+	}
 
 }

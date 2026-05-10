@@ -2,6 +2,8 @@ package org.desertskyrangers.caspian;
 
 public class Vector {
 
+	public static final double[] ZERO = Vector.of( 0, 0 );
+
 	public static double[] of( double x, double y ) {
 		return new double[]{ x, y };
 	}

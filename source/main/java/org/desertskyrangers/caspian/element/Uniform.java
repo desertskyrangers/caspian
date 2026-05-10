@@ -1,7 +1,9 @@
 package org.desertskyrangers.caspian.element;
 
+import lombok.Getter;
 import org.desertskyrangers.caspian.FlowElement;
 
+@Getter
 public class Uniform implements FlowElement {
 
 	private final double[] velocity;
@@ -18,12 +20,13 @@ public class Uniform implements FlowElement {
 		return new Uniform( v * Math.cos( theta ), v * Math.sin( theta ) );
 	}
 
-	public double[] getVelocity() {
-		return velocity;
-	}
-
 	public double[] velocity( double x, double y ) {
 		return new double[]{ velocity[ 0 ], velocity[ 1 ] };
+	}
+
+	@Override
+	public double[] velocityAtInfinity() {
+		return velocity;
 	}
 
 	//	public double stream( double x, double y ) {

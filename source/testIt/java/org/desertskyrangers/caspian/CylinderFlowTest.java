@@ -18,21 +18,21 @@ public class CylinderFlowTest {
 
 		double r = 0.5;
 		// The double strength is Vector.mag(onset)*2*Math.PI*R^2 where R is the cylinder radius
-		double mu = Vector.magnitude( field.getOnsetFlow().getVelocity() ) * Cfd.TWO_PI * r * r;
+		double mu = Vector.magnitude( field.getOnsetFlow().velocityAtInfinity() ) * Cfd.TWO_PI * r * r;
 		// The doublet orientation has to line up directly with the onset flow
-		field.add( new Doublet( 0.5, 0, Vector.angle( field.getOnsetFlow().getVelocity() ), mu ) );
+		field.add( new Doublet( 0.5, 0, Vector.angle( field.getOnsetFlow().velocityAtInfinity() ), mu ) );
 	}
 
 	@Test
 	void testCylinderFlowVelocity() {
-		assertThat( field.velocityAt( -1, 0 ) ).isCloseTo( new double[]{ 8.0 / 9.0, 0 } );
-		assertThat( field.velocityAt( 0, 0 ) ).isCloseTo( new double[]{ 0, 0 } );
-		assertThat( field.velocityAt( 0.5, 0 ) ).isCloseTo( new double[]{ Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY } );
-		assertThat( field.velocityAt( 1, 0 ) ).isCloseTo( new double[]{ 0, 0 } );
-		assertThat( field.velocityAt( 2, 0 ) ).isCloseTo( new double[]{ 8.0 / 9.0, 0 } );
+		assertThat( field.velocity( -1, 0 ) ).isCloseTo( new double[]{ 8.0 / 9.0, 0 } );
+		assertThat( field.velocity( 0, 0 ) ).isCloseTo( new double[]{ 0, 0 } );
+		assertThat( field.velocity( 0.5, 0 ) ).isCloseTo( new double[]{ Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY } );
+		assertThat( field.velocity( 1, 0 ) ).isCloseTo( new double[]{ 0, 0 } );
+		assertThat( field.velocity( 2, 0 ) ).isCloseTo( new double[]{ 8.0 / 9.0, 0 } );
 
-		assertThat( field.velocityAt( 0.5, -1 ) ).isCloseTo( new double[]{ 1.25, 0 } );
-		assertThat( field.velocityAt( 0.5, 1 ) ).isCloseTo( new double[]{ 1.25, 0 } );
+		assertThat( field.velocity( 0.5, -1 ) ).isCloseTo( new double[]{ 1.25, 0 } );
+		assertThat( field.velocity( 0.5, 1 ) ).isCloseTo( new double[]{ 1.25, 0 } );
 	}
 
 	@Test
