@@ -1,14 +1,12 @@
-package org.desertskyrangers.caspian.element;
-
-import org.desertskyrangers.caspian.FlowElement;
+package org.desertskyrangers.caspian;
 
 import java.util.Set;
 
-public class AggregateFlow implements FlowElement {
+public class FlowSet implements Flow {
 
-	private final Set<FlowElement> elements;
+	private final Set<Flow> elements;
 
-	public AggregateFlow( Set<FlowElement> elements ) {
+	public FlowSet( Set<Flow> elements ) {
 		this.elements = elements;
 	}
 
@@ -25,7 +23,7 @@ public class AggregateFlow implements FlowElement {
 	@Override
 	public double[] velocityAtInfinity() {
 		double[] result = new double[ 2 ];
-		elements.stream().map( FlowElement::velocityAtInfinity ).forEach( vector -> {
+		elements.stream().map( Flow::velocityAtInfinity ).forEach( vector -> {
 			result[ 0 ] += vector[ 0 ];
 			result[ 1 ] += vector[ 1 ];
 		} );

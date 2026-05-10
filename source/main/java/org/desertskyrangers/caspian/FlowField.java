@@ -1,14 +1,13 @@
 package org.desertskyrangers.caspian;
 
 import lombok.Getter;
-import org.desertskyrangers.caspian.element.AggregateFlow;
 import org.desertskyrangers.caspian.element.Uniform;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FlowField implements FlowElement{
+public class FlowField implements Flow {
 
 	@Getter
 	private final Air air;
@@ -18,7 +17,7 @@ public class FlowField implements FlowElement{
 	private final double pressureAtInfinity;
 
 	// TODO The onset flow should also be a set of flow elements.
-	private final AggregateFlow onsetFlow;
+	private final FlowSet onsetFlow;
 
 	private final Set<FlowElement> elements;
 
@@ -30,15 +29,15 @@ public class FlowField implements FlowElement{
 		this( air, Set.of( onsetFlow ) );
 	}
 
-	public FlowField( Air air, Set<FlowElement> onsetFlow ) {
+	public FlowField( Air air, Set<Flow> onsetFlow ) {
 		this.air = air;
-		this.onsetFlow = new AggregateFlow(  onsetFlow  );
+		this.onsetFlow = new FlowSet( onsetFlow );
 		this.velocityAtInfinity = Vector.magnitude( this.onsetFlow.velocityAtInfinity() );
 		this.pressureAtInfinity = air.pressure() - (0.5 * air.density() * velocityAtInfinity * velocityAtInfinity);
 		this.elements = new HashSet<>();
 	}
 
-	public FlowElement getOnsetFlow() {
+	public Flow getOnsetFlow() {
 		return onsetFlow;
 	}
 
@@ -54,7 +53,7 @@ public class FlowField implements FlowElement{
 		final double[] v = new double[]{ 0, 0 };
 
 		// Add the onset flow velocity
-		Vector.add( v, getOnsetFlow().velocity(x,y) );
+		Vector.add( v, getOnsetFlow().velocity( x, y ) );
 
 		// Add all the local velocity
 		Vector.add( v, relativeVelocity( x, y ) );
@@ -91,7 +90,7 @@ public class FlowField implements FlowElement{
 	 * @return The relative pressure at the given point
 	 */
 	public double relativePressureAt( double x, double y ) {
-		return pressureAt(x,y) - pressureAtInfinity;
+		return pressureAt( x, y ) - pressureAtInfinity;
 	}
 
 }
